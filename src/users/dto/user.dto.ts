@@ -16,7 +16,7 @@ export class CreateUserDto {
 
   @ApiProperty({ required: false, example: 18 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   age?: number;
 
   @ApiProperty({ required: true, example: 'user@gmail.com' })
@@ -34,7 +34,11 @@ export class CreateUserDto {
   @IsBoolean()
   @IsOptional()
   status?: boolean;
+
+  @ApiProperty()
+  avatar: string;
 }
+
 export class UpdateUserDto {
   @ApiProperty({ required: true, example: 'Vasya' })
   @IsString()
@@ -61,4 +65,7 @@ export class UpdateUserDto {
   @IsBoolean()
   @IsOptional()
   status?: boolean;
+
+  @ApiProperty()
+  avatar?: string;
 }

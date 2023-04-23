@@ -14,6 +14,7 @@ export class UsersService {
         age: userData.age,
         city: userData.city,
         status: userData.status,
+        avatar: userData.avatar,
       },
     });
   }

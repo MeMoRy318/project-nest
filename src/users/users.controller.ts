@@ -9,10 +9,15 @@ import {
   Post,
   Req,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { editFileName, imageFileFilter } from '../core/file.upload';
 
 @Controller('users')
 @ApiTags('User')
@@ -20,10 +25,24 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './public',
+        filename: editFileName,
+      }),
+      fileFilter: imageFileFilter,
+    }),
+  )
   async createUser(
+    @Req() req: any,
     @Res() res: any,
     @Body() body: CreateUserDto,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<CreateUserDto> {
+    if (file) {
+      body.avatar = `public/${file.filename}`;
+    }
     return res
       .status(HttpStatus.CREATED)
       .json(await this.userService.createUser(body));

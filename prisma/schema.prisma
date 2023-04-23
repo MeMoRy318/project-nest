@@ -13,6 +13,7 @@ model User {
   age    Int?
   email  String
   city   String?
+  avatar String?
   status Boolean @default(false)
   pets   Pet[]   @relation("UserPet")
 }
@@ -22,6 +23,8 @@ model Pet {
   name    String
   type    String
   age     Int?
+  image   String?
+  logo    String?
   ownerId String?
   owner   User?   @relation("UserPet", fields: [ownerId], references: [id])
 }

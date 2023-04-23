@@ -5,10 +5,13 @@ import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { PrismaService } from './core/prisma.service';
+import { PetsController } from './pets/pets.controller';
+import { PetsModule } from './pets/pets.module';
+import { PetsService } from './pets/pets.service';
 
 @Module({
-  imports: [UsersModule],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService, PrismaService],
+  imports: [UsersModule, PetsModule],
+  controllers: [AppController, UsersController, PetsController],
+  providers: [AppService, UsersService, PrismaService, PetsService],
 })
 export class AppModule {}
