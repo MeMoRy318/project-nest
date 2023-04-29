@@ -8,9 +8,10 @@ import { PrismaService } from './core/prisma.service';
 import { PetsController } from './pets/pets.controller';
 import { PetsModule } from './pets/pets.module';
 import { PetsService } from './pets/pets.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, PetsModule],
+  imports: [UsersModule, PetsModule, AuthModule],
   controllers: [AppController, UsersController, PetsController],
   providers: [AppService, UsersService, PrismaService, PetsService],
 })

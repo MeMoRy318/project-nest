@@ -14,6 +14,7 @@ model User {
   email  String
   city   String?
   avatar String?
+  password String
   status Boolean @default(false)
   pets   Pet[]   @relation("UserPet")
 }

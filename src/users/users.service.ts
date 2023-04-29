@@ -15,6 +15,7 @@ export class UsersService {
         city: userData.city,
         status: userData.status,
         avatar: userData.avatar,
+        password: userData.password,
       },
     });
   }
@@ -43,5 +44,9 @@ export class UsersService {
 
   async deleteById(id: string): Promise<void> {
     await this.prismaService.user.delete({ where: { id } });
+  }
+
+  async findOne(email: string): Promise<CreateUserDto> {
+    return await this.prismaService.user.findFirst({ where: { email } });
   }
 }
